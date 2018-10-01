@@ -1,0 +1,5 @@
+# Ignore anything in the Reference Directory
+.refs/*
+
+# Ignore any Vim config that isn't explicitly committed
+.package_config/vim/*

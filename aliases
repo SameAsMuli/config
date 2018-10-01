@@ -17,15 +17,16 @@ alias tn="tmux new-session -s"
 
 # NAVIGATION
 # Quickly navigate between directories
-alias src='cd $SRC'
-alias support='cd $HOME/support'
-alias sims='cd $HOME/simulators'
-alias visual='cd $HOME/test_centre/visual'
+alias config='cd $CUSTOM_CONFIG_DIR'
 alias cslim='cd $HOME/test_centre/cslim'
+alias db='cd $HOME/database'
 alias fitnes='cd $HOME/test_centre/fitnesse'
 alias fitroot='cd $HOME/test_centre/fitnesse/FitNesseRoot/TestCentre'
-alias sel='cd $HOME/test_centre/fitnesse/selenium/run_selenium'
-alias db='cd $HOME/database'
+alias inst='cd $HOME/personal/install'
 alias log='cd $HOME/logging'
 alias pers='cd $HOME/personal'
-alias inst='cd $HOME/personal/install'
+alias sel='cd $HOME/test_centre/fitnesse/selenium/run_selenium'
+alias sims='cd $HOME/simulators'
+alias src='cd $SRC'
+alias support='cd $HOME/support'
+alias visual='cd $HOME/test_centre/visual'

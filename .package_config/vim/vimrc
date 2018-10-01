@@ -1,0 +1,445 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GENERAL SETUP                                           "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Disable compatibility mode (required if vimrc is sourced via -u)
+set nocompatible
+
+" Ensure highlighting is turned on
+set hlsearch
+
+" set default 'runtimepath' (without ~/.vim folders)
+let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
+
+" what is the name of the directory containing this file?
+let s:portable = expand('<sfile>:p:h')
+
+" add the directory to 'runtimepath'
+let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM PLUGIN MANAGER                                      "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+
+" COLOUR SCHEMES
+  " My colourscheme
+  Plug 'SameAsMuli/desert-noir'
+
+  " Gruvbox Colour Scheme
+  Plug 'morhetz/gruvbox'
+
+  " Monokai
+  Plug 'sickill/vim-monokai'
+
+  " Dracula
+  Plug 'dracula/vim'
+
+  " Syntax for FitNesse files
+  Plug 'vim-scripts/fitnesse.vim'
+
+  " LimeLight - Hyperfocus-writing in Vim
+  Plug 'junegunn/limelight.vim'
+
+" WORKFLOW
+  " Mercurial Wrapper
+  Plug 'jlfwong/vim-mercenary'
+
+  " Goyo - Distraction-free writing in Vim
+  Plug 'junegunn/goyo.vim'
+
+" CODING SHORTCUTS
+
+  " UNIX style commands
+  Plug 'tpope/vim-eunuch'
+
+  " Surround
+  Plug 'tpope/vim-surround'
+
+  " Commentary
+  Plug 'tpope/vim-commentary'
+
+  " Date/Time Incrementing
+  Plug 'tpope/vim-speeddating'
+
+" MOVEMENT
+  " Tmux Navigation
+  " Plug 'christoomey/vim-tmux-navigator'
+
+  " Maximize a vim-split
+  Plug 'vim-scripts/ZoomWin'
+
+" OTHER
+  " Python Code Tags
+  " Plug 'mgedmin/pytag.vim'
+
+  " Airline Status Bar
+  " Plug 'vim-airline/vim-airline'
+
+call plug#end()
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DAI STANDARDS                                           "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("terminfo")
+  set t_Co=8
+  set t_Sf=[3%p1%dm
+  set t_Sb=[4%p1%dm
+else
+  set t_Co=8
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+endif
+
+syntax enable
+colo desert-noir
+set sm
+set sw=2
+set noai
+set cindent
+set expandtab
+set pastetoggle=<F12>
+"set paste
+set bs=2
+set ruler
+set complete=.,w,b,u,t,]
+set completeopt=preview
+
+map <F8> :!ut_ctags<CR>
+map! <F8> <ESC>:!ut_ctags<CR>
+set tags=./tags,./TAGS,tags,TAGS,.tags,~/.tags,~/.TAGS,~/source/.tags
+
+map <F9> :!ut_lib %<CR>
+map! <F9> <ESC>:!ut_lib %<CR>
+map <F10> :!ut_build %<CR>
+map! <F10> <ESC>:!ut_build %<CR>
+
+if has("folding")
+  set foldmethod=indent
+  set foldlevel=99
+endif " has("folding")
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  autocmd BufRead web_* map <F10> :!ut_lib % && ut_build web_om<CR>
+  autocmd BufRead web_* map! <F10> <ESC>:!ut_lib % && ut_build web_om<CR>
+
+  autocmd BufRead web_om.c map <F10> :!ut_build web_om<CR>
+  autocmd BufRead web_om.c map! <F10> <ESC>:!ut_build web_om<CR>
+
+  autocmd BufRead web_loi_* map <F10> :!ut_lib % && ut_build web_loi<CR>
+  autocmd BufRead web_loi_* map! <F10> <ESC>:!ut_lib % && ut_build web_loi<CR>
+
+  autocmd BufRead web_loi.c map <F10> :!ut_build web_loi<CR>
+  autocmd BufRead web_loi.c map! <F10> <ESC>:!ut_build web_loi<CR>
+
+  autocmd BufRead web_setup.c map <F10> :!ut_build %<CR>
+  autocmd BufRead web_setup.c map! <F10> <ESC>:!ut_build %<CR>
+
+  autocmd BufRead web_roi* map <F10> :!ut_lib % && ut_roi<CR>
+  autocmd BufRead web_roi* map! <F10> <ESC>:!ut_lib % && ut_roi<CR>
+
+  autocmd BufRead oi_* map <F10> :!ut_lib % && ut_build web_moi<CR>
+  autocmd BufRead oi_* map! <F10> <ESC>:!ut_lib % && ut_build web_moi<CR>
+
+  autocmd BufRead web_moi* map <F10> :!ut_lib % && ut_build web_moi<CR>
+  autocmd BufRead web_moi* map! <F10> <ESC>:!ut_lib % && ut_build web_moi<CR>
+
+  autocmd BufRead rdt* map <F10> :!ut_lib % && ut_build rdt_control<CR>
+  autocmd BufRead rdt* map! <F10> <ESC>:!ut_lib % && ut_build rdt_control<CR>
+
+  autocmd BufRead *.js map <F10> :!web_setup<CR>
+  autocmd BufRead *.js map! <F10> :<ESC>!web_setup<CR>
+
+  autocmd BufRead *.css map <F10> :!web_setup<CR>
+  autocmd BufRead *.css map! <F10> :<ESC>!web_setup<CR>
+
+endif " has("autocmd")
+
+" Map shortcuts to write doxygen blocks if the doxygen plugin is found
+function! DoxyShortcuts()
+  map /**f <ESC>:DoxyFunction<CR>
+  map! /**f <ESC>:DoxyFunction<CR>
+  map /**b <ESC>:DoxyBlockLong<CR>
+  map! /**b <ESC>:DoxyBlockLong<CR>
+  map /**< <ESC>:DoxyBriefAfterMember<CR>
+  map! /**< <ESC>:DoxyBriefAfterMember<CR>
+endfunction
+autocmd VimEnter * if exists("g:DoxygenVersion") | :call DoxyShortcuts() | endif
+
+map <C-F> :!grep -n <cword> *.c *.h *.plugin > .vimfind<CR> :10sp .vimfind<CR> <C-W>r<CR>
+
+:filetype plugin on
+
+if has("autocmd")
+
+  autocmd BufRead *.plugin set filetype=plugin
+  autocmd BufRead sdf.txt set filetype=sdf
+  autocmd BufRead df_alias.txt set filetype=df_alias
+  autocmd BufRead df_proj_alias.txt set filetype=df_alias
+
+  " Standard export filenames for system config
+  autocmd BufRead *.menu_config set filetype=datascript
+  autocmd BufRead *.screen_settings set filetype=datascript
+  autocmd BufRead *.settings set filetype=datascript
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+endif " has("autocmd")
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CUSTOM CHANGES                                          "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Add persistent undo
+" Put plugins and dictionaries in this dir
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
+
+""""""""""""""""""""""""""""""
+
+" Quick exit of insert mode (keep hands in home position)
+imap jk <Esc>
+imap jK <Esc>
+imap Jk <Esc>
+imap JK <Esc>
+
+""""""""""""""""""""""""""""""
+
+" Gives a minimum of 5 lines above/below cursor
+set scrolloff=5
+
+""""""""""""""""""""""""""""""
+
+" Do incremental searching when it's possible to timeout
+if has('reltime')
+  set incsearch
+endif
+
+""""""""""""""""""""""""""""""
+
+" Do not recognise octal numbers for Ctrl-A and Ctrl-X
+set nrformats-=octal
+
+""""""""""""""""""""""""""""""
+
+" Better autocomplete
+set wildmenu
+
+""""""""""""""""""""""""""""""
+
+" Set indentation to 2 spaces
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+""""""""""""""""""""""""""""""
+
+" Y yanks to EOL rather than acting as yy
+map Y y$
+
+""""""""""""""""""""""""""""""
+
+" Ctrl-L disables search highlighting until next serach
+nnoremap <C-L> :nohl<CR><C-L>
+
+""""""""""""""""""""""""""""""
+
+" When using an xterm terminal, interpret escape sequences
+" as numbers (i.e. allows the use of the num pad)
+imap <Esc>Oq 1
+map <Esc>Oq 1
+imap <Esc>Or 2
+map <Esc>Or 2
+imap <Esc>Os 3
+map <Esc>Os 3
+imap <Esc>Ot 4
+map <Esc>Ot 4
+imap <Esc>Ou 5
+map <Esc>Ou 5
+imap <Esc>Ov 6
+map <Esc>Ov 6
+imap <Esc>Ow 7
+map <Esc>Ow 7
+imap <Esc>Ox 8
+map <Esc>Ox 8
+imap <Esc>Oy 9
+map <Esc>Oy 9
+imap <Esc>Op 0
+map <Esc>Op 0
+imap <Esc>On .
+map <Esc>On .
+imap <Esc>OR *
+map <Esc>OR *
+imap <Esc>OQ /
+map <Esc>OQ /
+imap <Esc>Ol +
+map <Esc>Ol +
+imap <Esc>OS -
+map <Esc>OS -
+
+""""""""""(DISABLED)""""""""""
+
+" Tab and Shift-Tab forward and backtabs a line in non-
+" insert mode respectively
+" nnoremap <Tab> >>
+" nnoremap <S-Tab> <<
+
+""""""""""""""""""""""""""""""
+
+" Change paste - swap the current word with the clipboard
+nnoremap cp viwp
+
+""""""""""""""""""""""""""""""
+
+" Autocompletion menu on Ctrl + P in insert mode
+set completeopt=menu
+
+""""""""""(DISABLED)""""""""""
+
+" Move to beginning/end of line
+" nnoremap B ^
+" nnoremap E $
+
+""""""""""""""""""""""""""""""
+
+" Autocomplete filepaths on TAB in insert mode
+imap <Tab> <C-X><C-F>
+
+""""""""""""""""""""""""""""""
+
+" Enter single command mode by using kj
+imap kk <C-O>
+
+""""""""""""""""""""""""""""""
+
+" Return to same place when paging up or down
+map <silent> <PageUp> 1000<C-U>
+map <silent> <PageDown> 1000<C-D>
+imap <silent> <PageUp> <C-O>1000<C-U>
+imap <silent> <PageDown> <C-O>1000<C-D>
+set nostartofline
+
+""""""""""""""""""""""""""""""
+
+" Re-source .vimrc
+map <F7> :source ~/.vim/vimrc<CR> \| :echom "Reloaded vimrc!"<CR>
+imap <F7> <C-O>:source ~/.vim/vimrc<CR> \| :echom "Reloaded vimrc!"<CR>
+
+" Source for all sessions when changing vimrc (NEEDS MORE WORK!)
+" function! UpdateVimRC()
+"    for server in split(serverlist())
+"        call remote_send(server, '<Esc>:source $HOME/.vimrc<CR>')
+"    endfor
+" endfunction
+" augroup myvimrchooks
+" au!
+"   autocmd bufwritepost .vimrc call UpdateVimRC()
+" augroup END
+
+""""""""""""""""""""""""""""""
+
+" Recognise fitnesse file types
+au BufReadPost *.wiki set syntax=fitnesse
+
+""""""""""""""""""""""""""""""
+
+" Bash bindings in insert mode
+imap <C-A> <Home>
+imap <C-E> <End>
+
+""""""""""""""""""""""""""""""
+
+" Goyo config
+inoremap <C-C> <C-O>:Goyo<CR>
+nnoremap <C-C> :Goyo<CR>
+
+let g:goyo_width = 100
+let g:goyo_height = 100
+
+function! s:goyo_enter()
+  "silent !tmux set status off
+  "silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  "set noshowmode
+  "set noshowcmd
+  set scrolloff=999
+endfunction
+
+function! s:goyo_leave()
+  "silent !tmux set status on
+  "silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  "set showmode
+  "set showcmd
+  set scrolloff=5
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+""""""""""""""""""""""""""""""
+
+" Limelight config
+let g:limelight_conceal_ctermfg = 240
+
+""""""""""""""""""""""""""""""
+
+" Highlight trailing white space except when typing at the end of a line
+:highlight ExtraWhitespace ctermbg=88 guibg=199
+:match ExtraWhitespace /\s\+\%#\@<!$/
+:au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+:au InsertLeave * match ExtraWhitespace /\s\+$/
+
+""""""""""""""""""""""""""""""
+
+" File History
+" Tell vim to remember certain things when we exit
+"    '10  :  marks will be remembered for up to 10 previously edited files
+"    "100 :  will save up to 100 lines for each register
+"    :20  :  up to 20 lines of command-line history will be remembered
+"    %    :  saves and restores the buffer list
+"    n... :  where to save the viminfo files
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
+
+""""""""""""""""""""""""""""""
+
+" So what if I quit/save when I have caps lock on...
+command! Q q
+command! W w
+command! WQ wq
+command! Wq wq
+
+""""""""""""""""""""""""""""""
