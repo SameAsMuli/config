@@ -1,0 +1,10 @@
+#################################################
+# SHELL OPTIONS                                 #
+#################################################
+
+# IMPROVE CD USAGE
+# Auto-complete cd for directories
+complete -d cd
+
+# Auto-correct small typos in directory names
+shopt -s cdspell

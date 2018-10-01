@@ -1,0 +1,31 @@
+#################################################
+# USER SPECIFIC ALIASES                         #
+#################################################
+
+# GENERAL
+alias vi='$EDITOR'
+alias vim='$EDITOR'
+alias view='$EDITOR -MR'
+alias la='ls -a'
+alias grep='grep --color=auto -n'
+alias please='sudo $(history -p !!)'
+
+# TMUX
+alias tmux="tmux -u"
+alias ta="tmux attach-session -t"
+alias tn="tmux new-session -s"
+
+# NAVIGATION
+# Quickly navigate between directories
+alias src='cd $SRC'
+alias support='cd $HOME/support'
+alias sims='cd $HOME/simulators'
+alias visual='cd $HOME/test_centre/visual'
+alias cslim='cd $HOME/test_centre/cslim'
+alias fitnes='cd $HOME/test_centre/fitnesse'
+alias fitroot='cd $HOME/test_centre/fitnesse/FitNesseRoot/TestCentre'
+alias sel='cd $HOME/test_centre/fitnesse/selenium/run_selenium'
+alias db='cd $HOME/database'
+alias log='cd $HOME/logging'
+alias pers='cd $HOME/personal'
+alias inst='cd $HOME/personal/install'
