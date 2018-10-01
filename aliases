@@ -11,7 +11,7 @@ alias grep='grep --color=auto -n'
 alias please='sudo $(history -p !!)'
 
 # TMUX
-alias tmux="tmux -u"
+alias tmux="tmux -f $CUSTOM_CONFIG_DIR/.package_config/tmux/tmux.conf -u"
 alias ta="tmux attach-session -t"
 alias tn="tmux new-session -s"
 
