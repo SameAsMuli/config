@@ -2,9 +2,14 @@
 # SHELL OPTIONS                                 #
 #################################################
 
-# IMPROVE CD USAGE
+# CD
 # Auto-complete cd for directories
 complete -d cd
 
 # Auto-correct small typos in directory names
 shopt -s cdspell
+
+
+# HISTORY
+# Append to history, don't overwrite it
+# shopt -s histappend

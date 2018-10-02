@@ -63,6 +63,9 @@ call plug#begin('~/.vim/plugged')
   " Date/Time Incrementing
   Plug 'tpope/vim-speeddating'
 
+  " Open a file on a specific line
+  Plug 'bogado/file-line'
+
 " MOVEMENT
   " Tmux Navigation
   " Plug 'christoomey/vim-tmux-navigator'
