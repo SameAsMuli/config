@@ -1,32 +1,17 @@
 #################################################
-# USER SPECIFIC ALIASES                         #
+# DEFAULT ALIASES                               #
 #################################################
 
 # GENERAL
-alias vi='$EDITOR'
-alias vim='$EDITOR'
-alias view='$EDITOR -MR'
-alias la='ls -a'
+alias config='cd $CUSTOM_CONFIG_DIR'
 alias grep='grep --color=auto -n'
+alias la='ls -a'
 alias please='sudo $(history -p !!)'
+alias vi='$EDITOR'
+alias view='$EDITOR -MR'
+alias vim='$EDITOR'
 
 # TMUX
 alias tmux="tmux -f $CUSTOM_CONFIG_PACKAGES_DIR/tmux/tmux.conf -u"
 alias ta="tmux attach-session -t"
 alias tn="tmux new-session -s"
-
-# NAVIGATION
-# Quickly navigate between directories
-alias config='cd $CUSTOM_CONFIG_DIR'
-alias cslim='cd $HOME/test_centre/cslim'
-alias db='cd $HOME/database'
-alias fitnes='cd $HOME/test_centre/fitnesse'
-alias fitroot='cd $HOME/test_centre/fitnesse/FitNesseRoot/TestCentre'
-alias inst='cd $HOME/personal/install'
-alias log='cd $HOME/logging'
-alias pers='cd $HOME/personal'
-alias sel='cd $HOME/test_centre/fitnesse/selenium/run_selenium'
-alias sims='cd $HOME/simulators'
-alias src='cd $SRC'
-alias support='cd $HOME/support'
-alias visual='cd $HOME/test_centre/visual'

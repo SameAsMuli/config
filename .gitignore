@@ -1,3 +1,6 @@
+# Allow user to add their own config without influencing git
+*.local
+
 # Ignore anything in the Reference Directory
 .refs/*
 
