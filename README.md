@@ -17,7 +17,7 @@ Once cloned onto a new system, the following instructions need to be followed:
    ```
 
 ### Vim
- * Open config/.package\_config/vim/vimrc and run `:PlugInstall`
+ * Open $CUSTOM\_CONFIG\_PACKAGES\_DIR/vim/vimrc and run `:PlugInstall`
 
 ## Custom Commands
 ### Safe Delete

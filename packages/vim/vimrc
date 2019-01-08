@@ -446,3 +446,8 @@ command! WQ wq
 command! Wq wq
 
 """"""""""""""""""""""""""""""
+
+" Quick switch to last opened file
+nmap <C-W>p :e#<CR>
+
+""""""""""""""""""""""""""""""
