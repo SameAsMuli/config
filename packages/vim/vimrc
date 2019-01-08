@@ -451,3 +451,15 @@ command! Wq wq
 nmap <C-W>p :e#<CR>
 
 """"""""""""""""""""""""""""""
+
+" Add notes functionality
+function! NoteFunc(...)
+  if a:0 == 0
+    e $NOTE_FILE
+  else
+    let l:name = $NOTE_FILE . '-' . a:1
+    execute 'edit' name
+  endif
+endfunction
+
+command! -nargs=? Note call NoteFunc(<f-args>)
