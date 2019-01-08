@@ -29,12 +29,30 @@ function note() {
     EDITOR=vi
   fi
 
-  if [[ $# == 0 ]]
+  if [ $# -eq 0 ]
   then
     $EDITOR $NOTE_FILE
   elif [[ $1 == "--help" ]]
   then
-    echo "note [--list] [filename]"
+    echo "note [OPTION] [FILE]"
+  elif [[ $1 == "-r" || $1 == "--rm" || $1 == "--remove" ]]
+  then
+    if [ $# -lt 2 ]
+    then
+      echo "Error: No notes file given to remove"
+      return 1
+    fi
+
+    for ((i=2;i<=$#;i++))
+    do
+      if [ ! -f $NOTE_FILE-${!i} ]
+      then
+        echo "Error: No such notes file '${!i}'"
+        return 1
+      else
+        command rm $NOTE_FILE-${!i}
+      fi
+    done
   elif [[ $1 == "--list" ]]
   then
     if [[ `ls $NOTE_FILE-* 2> /dev/null | wc -l` == 0 ]]

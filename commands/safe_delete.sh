@@ -21,7 +21,7 @@ then
 fi
 
 # Define Last Deleted file
-LAST_DEL=$CUSTOM_REFS_DIR/.last_delete
+LAST_DEL=$CUSTOM_REFS_DIR/last_delete
 
 function clear_deleted()
 {
