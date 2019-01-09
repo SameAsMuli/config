@@ -27,30 +27,33 @@ call plug#begin('~/.vim/plugged')
   " My colourscheme
   Plug 'SameAsMuli/desert-noir'
 
+  " Dracula
+  Plug 'dracula/vim'
+
   " Gruvbox Colour Scheme
   Plug 'morhetz/gruvbox'
 
   " Monokai
   Plug 'sickill/vim-monokai'
 
-  " Dracula
-  Plug 'dracula/vim'
+  " Srcery
+  Plug 'srcery-colors/srcery-vim'
 
+" SYNTAX HIGHLIGHTING
   " Syntax for FitNesse files
   Plug 'vim-scripts/fitnesse.vim'
+
+" WORKFLOW
+  " Goyo - Distraction-free writing in Vim
+  Plug 'junegunn/goyo.vim'
 
   " LimeLight - Hyperfocus-writing in Vim
   Plug 'junegunn/limelight.vim'
 
-" WORKFLOW
   " Mercurial Wrapper
   Plug 'jlfwong/vim-mercenary'
 
-  " Goyo - Distraction-free writing in Vim
-  Plug 'junegunn/goyo.vim'
-
 " CODING SHORTCUTS
-
   " UNIX style commands
   Plug 'tpope/vim-eunuch'
 
@@ -303,12 +306,12 @@ map <Esc>Ol +
 imap <Esc>OS -
 map <Esc>OS -
 
-""""""""""(DISABLED)""""""""""
+""""""""""""""""""""""""""""""
 
 " Tab and Shift-Tab forward and backtabs a line in non-
 " insert mode respectively
-" nnoremap <Tab> >>
-" nnoremap <S-Tab> <<
+noremap <Tab> >>
+noremap <S-Tab> <<
 
 """"""""""""""""""""""""""""""
 
@@ -348,13 +351,13 @@ set nostartofline
 """"""""""""""""""""""""""""""
 
 " Re-source .vimrc
-map <F7> :source ~/.vim/vimrc<CR> \| :echom "Reloaded vimrc!"<CR>
-imap <F7> <C-O>:source ~/.vim/vimrc<CR> \| :echom "Reloaded vimrc!"<CR>
+map <F7> :source $CUSTOM_CONFIG_PACKAGES_DIR/vim/vimrc<CR> \| :echom "Reloaded vimrc!"<CR>
+imap <F7> <C-O>:source $CUSTOM_CONFIG_PACKAGES_DIR/vim/vimrc<CR> \| :echom "Reloaded vimrc!"<CR>
 
 " Source for all sessions when changing vimrc (NEEDS MORE WORK!)
 " function! UpdateVimRC()
 "    for server in split(serverlist())
-"        call remote_send(server, '<Esc>:source $HOME/.vimrc<CR>')
+"        call remote_send(server, '<Esc>:source $CUSTOM_CONFIG_PACKAGES_DIR/vim/vimrc<CR>')
 "    endfor
 " endfunction
 " augroup myvimrchooks
@@ -457,9 +460,10 @@ function! NoteFunc(...)
   if a:0 == 0
     e $NOTE_FILE
   else
-    let l:name = $NOTE_FILE . '-' . a:1
-    execute 'edit' name
+    execute 'edit' $NOTE_FILE . '-' . a:1
   endif
 endfunction
 
 command! -nargs=? Note call NoteFunc(<f-args>)
+
+""""""""""""""""""""""""""""""
