@@ -17,17 +17,6 @@ else
   unset CUSTOM_CONFIG_COMMANDS_DIR
 fi
 
-export CUSTOM_CONFIG_LOCAL_DIR=$CUSTOM_CONFIG_DIR/local
-if [ -d $CUSTOM_CONFIG_LOCAL_DIR ]
-then
-  for file in $(find $CUSTOM_CONFIG_LOCAL_DIR -type f -not -name "*.md" -not -path '*/\.*')
-  do
-    source $file
-  done
-else
-  unset CUSTOM_CONFIG_LOCAL_DIR
-fi
-
 export CUSTOM_CONFIG_PACKAGES_DIR=$CUSTOM_CONFIG_DIR/packages
 if [ ! -d $CUSTOM_CONFIG_PACKAGES_DIR ]
 then
@@ -43,4 +32,15 @@ then
   done
 else
   unset CUSTOM_CONFIG_TERMINAL_DIR
+fi
+
+export CUSTOM_CONFIG_LOCAL_DIR=$CUSTOM_CONFIG_DIR/local
+if [ -d $CUSTOM_CONFIG_LOCAL_DIR ]
+then
+  for file in $(find $CUSTOM_CONFIG_LOCAL_DIR -type f -not -name "*.md" -not -path '*/\.*')
+  do
+    source $file
+  done
+else
+  unset CUSTOM_CONFIG_LOCAL_DIR
 fi

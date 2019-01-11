@@ -35,6 +35,48 @@ function note() {
   elif [[ $1 == "--help" ]]
   then
     echo "note [OPTION] [FILE]"
+    echo ""
+    echo "  -l, --list    list all notes files"
+    echo "  -m, --move    change the name of a notes file"
+    echo "  -r, --remove  delete one or more notes files"
+  elif [[ $1 == "-l" || $1 == "--list" ]]
+  then
+    if [[ `ls $NOTE_FILE-* 2> /dev/null | wc -l` == 0 ]]
+    then
+      echo "No additional notes files"
+    else
+      echo "Existing notes files:"
+      ls $NOTE_FILE-* | sed 's/.*-/  /'
+    fi
+  elif [[ $1 == "-m" || $1 == "--mv" || $1 == "--move" ]]
+  then
+    if [ $# -lt 2 ]
+    then
+      echo "Error: No notes file given to move"
+      return 1
+    elif [ $# -lt 3 ]
+    then
+      echo "Error: No new name given for notes file"
+      return 1
+    elif [ $# -gt 3 ]
+    then
+      echo "Error: Too many arguments given"
+      return 1
+    elif [ ! -f $NOTE_FILE-$2 ]
+    then
+      echo "Error: No such notes file '$2'"
+      return 1
+    elif [[ $2 == $3 ]]
+    then
+      echo "Error: cannot rename '$2' to the same name"
+      return 1
+    elif [ -f $NOTE_FILE-$3 ]
+    then
+      echo "Error: Notes file '$3' already exists"
+      return 1
+    else
+      mv $NOTE_FILE-$2 $NOTE_FILE-$3
+    fi
   elif [[ $1 == "-r" || $1 == "--rm" || $1 == "--remove" ]]
   then
     if [ $# -lt 2 ]
@@ -53,15 +95,6 @@ function note() {
         command rm $NOTE_FILE-${!i}
       fi
     done
-  elif [[ $1 == "--list" ]]
-  then
-    if [[ `ls $NOTE_FILE-* 2> /dev/null | wc -l` == 0 ]]
-    then
-      echo "No additional notes files"
-    else
-      echo "Existing notes files:"
-      ls $NOTE_FILE-* | sed 's/.*-/  /'
-    fi
   elif [[ $1 =~ "-" ]]
   then
     echo "Unknown option: $1"
