@@ -9,6 +9,13 @@ complete -d cd
 # Auto-correct small typos in directory names
 shopt -s cdspell
 
+# HG
+# Auto-complete hg commands
+if [ -f /etc/bash_completion.d/mercurial.sh ]
+then
+  source /etc/bash_completion.d/mercurial.sh
+fi
+
 
 # HISTORY
 # Append to history, don't overwrite it

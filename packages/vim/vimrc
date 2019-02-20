@@ -53,6 +53,9 @@ call plug#begin('~/.vim/plugged')
   " Mercurial Wrapper
   Plug 'jlfwong/vim-mercenary'
 
+  " Vim Wiki
+  Plug 'vimwiki/vimwiki'
+
 " CODING SHORTCUTS
   " UNIX style commands
   Plug 'tpope/vim-eunuch'

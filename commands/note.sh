@@ -25,8 +25,22 @@ function note() {
   # Decide the editor to use
   if [ -z "$EDITOR" ]
   then
-    # TODO Check which editors are installed
-    EDITOR=vi
+    if command -v nvim > /dev/null
+    then
+      EDITOR=nvim
+    elif command -v vim > /dev/null
+    then
+      EDITOR=vim
+    elif command -v vi > /dev/null
+    then
+      EDITOR=vi
+    elif command -v nano > /dev/null
+    then
+      EDITOR=nano
+    else
+      echo "Could not find editor to use"
+      exit 1
+    fi
   fi
 
   if [ $# -eq 0 ]
@@ -37,7 +51,7 @@ function note() {
     echo "note [OPTION] [FILE]"
     echo ""
     echo "  -l, --list    list all notes files"
-    echo "  -m, --move    change the name of a notes file"
+    echo "  -n, --rename  change the name of a notes file"
     echo "  -r, --remove  delete one or more notes files"
   elif [[ $1 == "-l" || $1 == "--list" ]]
   then
@@ -45,10 +59,9 @@ function note() {
     then
       echo "No additional notes files"
     else
-      echo "Existing notes files:"
       ls $NOTE_FILE-* | sed 's/.*-/  /'
     fi
-  elif [[ $1 == "-m" || $1 == "--mv" || $1 == "--move" ]]
+  elif [[ $1 == "-n" || $1 == "--rename" ]]
   then
     if [ $# -lt 2 ]
     then
@@ -105,3 +118,4 @@ function note() {
 }
 
 alias notes='note'
+source /etc/bash_completion.d/note
