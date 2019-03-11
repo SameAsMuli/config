@@ -9,7 +9,7 @@ fi
 export CUSTOM_CONFIG_COMMANDS_DIR=$CUSTOM_CONFIG_DIR/commands
 if [ -d $CUSTOM_CONFIG_COMMANDS_DIR ]
 then
-  for file in $(find $CUSTOM_CONFIG_COMMANDS_DIR -type f -not -name "*.md" -not -path '*/\.*')
+  for file in $(find $CUSTOM_CONFIG_COMMANDS_DIR -type f -not -name "*.md" -not -path "$CUSTOM_CONFIG_COMMANDS_DIR*/\.*")
   do
     source $file
   done
@@ -26,7 +26,7 @@ fi
 export CUSTOM_CONFIG_TERMINAL_DIR=$CUSTOM_CONFIG_DIR/terminal
 if [ -d $CUSTOM_CONFIG_TERMINAL_DIR ]
 then
-  for file in $(find $CUSTOM_CONFIG_TERMINAL_DIR -type f -not -name "*.md" -not -path '*/\.*')
+  for file in $(find $CUSTOM_CONFIG_TERMINAL_DIR -type f -not -name "*.md" -not -path "$CUSTOM_CONFIG_TERMINAL_DIR*/\.*")
   do
     source $file
   done
@@ -37,7 +37,7 @@ fi
 export CUSTOM_CONFIG_LOCAL_DIR=$CUSTOM_CONFIG_DIR/local
 if [ -d $CUSTOM_CONFIG_LOCAL_DIR ]
 then
-  for file in $(find $CUSTOM_CONFIG_LOCAL_DIR -type f -not -name "*.md" -not -path '*/\.*')
+  for file in $(find $CUSTOM_CONFIG_LOCAL_DIR -type f -not -name "*.md" -not -path "$CUSTOM_CONFIG_LOCAL_DIR*/\.*")
   do
     source $file
   done
