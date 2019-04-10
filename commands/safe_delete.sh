@@ -165,7 +165,7 @@ function rm()
       read -p "Select Function : " option
       case $option in
         [Dd]* ) for (( i=0+$OPTIONS; i<$SIZE; i++ )); do command rm ${ARGS[$i]}; done; return 0;;
-        [Cc]* ) mkdir $DEL_DIR && alias del="cd $DEL_DIR" && move_to_deleted $@ || return 1; return 0;;
+        [Cc]* ) mkdir $DEL_DIR && alias del="cd $DEL_DIR" && break || return 1;;
         [Qq]* ) return 1;;
         * ) echo "Please choose a valid option.";;
       esac
