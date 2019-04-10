@@ -39,7 +39,7 @@ function note() {
       EDITOR=nano
     else
       echo "Could not find editor to use"
-      exit 1
+      return 1
     fi
   fi
 
