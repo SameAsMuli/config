@@ -480,6 +480,7 @@ set mouse=a
 """"""""""""""""""""""""""""""
 
 " Use better split characters
+set encoding=utf8
 set fillchars+=vert:│
 
 """"""""""""""""""""""""""""""

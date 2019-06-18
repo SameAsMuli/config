@@ -117,9 +117,30 @@ function note() {
   fi
 }
 
-alias notes='note'
+_note()
+{
+  if [ "${#COMP_WORDS[@]}" == "2" ]
+  then
+    COMPREPLY=($(compgen -W "$(note --list)" -- "${COMP_WORDS[1]}"))
+  fi
 
-if [ -f /etc/bash_completion.d/note ]
-then
-  source /etc/bash_completion.d/note
-fi
+  if ([ "${COMP_WORDS[1]}" == "-n" ] ||
+      [ "${COMP_WORDS[1]}" == "--rename" ]) &&
+     ([ "${#COMP_WORDS[@]}" == "3" ])
+  then
+    COMPREPLY=($(compgen -W "$(note --list)" -- "${COMP_WORDS[2]}"))
+  fi
+
+  if ([ "${COMP_WORDS[1]}" == "-r" ] ||
+      [ "${COMP_WORDS[1]}" == "--rm" ] ||
+      [ "${COMP_WORDS[1]}" == "--remove" ]) &&
+     ([ "${#COMP_WORDS[@]}" > "2" ])
+  then
+    COMPREPLY=($(compgen -W "$(note --list)" -- "${COMP_WORDS[$((${#COMP_WORDS[@]}-1))]}"))
+  fi
+
+  return
+}
+
+alias notes='note'
+complete -F _note note
