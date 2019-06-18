@@ -118,4 +118,8 @@ function note() {
 }
 
 alias notes='note'
-source /etc/bash_completion.d/note
+
+if [ -f /etc/bash_completion.d/note ]
+then
+  source /etc/bash_completion.d/note
+fi
