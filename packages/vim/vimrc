@@ -40,6 +40,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'srcery-colors/srcery-vim'
 
 " SYNTAX HIGHLIGHTING
+  " Syntax checking
+  Plug 'vim-syntastic/syntastic'
+
   " Syntax for FitNesse files
   Plug 'vim-scripts/fitnesse.vim'
 
@@ -71,7 +74,7 @@ call plug#begin('~/.vim/plugged')
 
 " MOVEMENT
   " Tmux Navigation
-  " Plug 'christoomey/vim-tmux-navigator'
+  Plug 'christoomey/vim-tmux-navigator'
 
   " Maximize a vim-split
   Plug 'vim-scripts/ZoomWin'
@@ -465,5 +468,28 @@ function! NoteFunc(...)
 endfunction
 
 command! -nargs=? Note call NoteFunc(<f-args>)
+
+""""""""""""""""""""""""""""""
+
+" Allow mouse usage
+set mouse=a
+
+""""""""""""""""""""""""""""""
+
+" Use better split characters
+set fillchars+=vert:│
+
+""""""""""""""""""""""""""""""
+
+" Configure Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
 
 """"""""""""""""""""""""""""""
