@@ -121,7 +121,7 @@ function rm()
       echo ""
       echo "If you specify more than one option, only the first one takes effect."
       echo ""
-      echo "When using rm on Lousma, all the files listed will be moved to"
+      echo "When using rm on `hostname -s`, all the files listed will be moved to"
       echo "the following directory rather than being deleted:"
       echo ""
       echo "  $DEL_DIR"
@@ -130,7 +130,7 @@ function rm()
       return 0
     elif [[ "$ARGS" == --version ]]
     then
-      echo "rm (Lousma's safe version) 1.5.1"
+      echo "rm (`hostname -s`'s safe version) 1.5.2"
       echo "This is free software: you are free to change and redistribute it."
       echo "There is NO WARRANTY, to the extent permitted by law."
       echo ""
