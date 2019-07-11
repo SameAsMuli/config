@@ -20,3 +20,8 @@ fi
 # HISTORY
 # Append to history, don't overwrite it
 # shopt -s histappend
+
+# UNSET
+# Auto-complete unset with current environment variables
+_unset() { COMPREPLY=($(compgen -W "$(env | sed 's/=.*$//;/^[}_]/d') $(declare -F | sed 's/declare -f.* //' | tr '\n' ' ')" -- "${COMP_WORDS[${#COMP_WORDS[@]}-1]}")); }
+complete -F _unset unset

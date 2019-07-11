@@ -497,3 +497,8 @@ set fillchars+=vert:│
 " let g:syntastic_check_on_wq = 1
 
 """"""""""""""""""""""""""""""
+
+" Intellij-style code block creation
+map  o{o}O
+imap  o{o}O
+imap  A
