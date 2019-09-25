@@ -43,7 +43,7 @@ function clear_deleted()
   shopt -u dotglob
 }
 
-function rm()
+function safe_delete()
 {
   SCRIPTPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
 
@@ -307,3 +307,5 @@ function restore()
     done
   fi
 }
+
+alias rm='safe_delete'

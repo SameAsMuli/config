@@ -77,7 +77,7 @@ call plug#begin('~/.vim/plugged')
 
 " MOVEMENT
   " Tmux Navigation
-  Plug 'christoomey/vim-tmux-navigator'
+  " Plug 'christoomey/vim-tmux-navigator'
 
   " Maximize a vim-split
   Plug 'vim-scripts/ZoomWin'
@@ -502,3 +502,10 @@ set fillchars+=vert:│
 map  o{o}O
 imap  o{o}O
 imap  A
+
+""""""""""""""""""""""""""""""
+
+" Intellij-style comment toggling
+nmap <C-_> gcc
+imap <C-_> <C-o>gcc
+vmap <C-_> gc
