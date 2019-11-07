@@ -34,18 +34,23 @@ function note() {
     elif command -v vi > /dev/null
     then
       EDITOR=vi
-    elif command -v nano > /dev/null
-    then
-      EDITOR=nano
     else
       echo "Could not find editor to use"
       return 1
     fi
   fi
 
+  # Set the linebreak option if we're using a vi variant
+  if grep -E 'vi |vim |nvim ' <<< "$EDITOR" > /dev/null
+  then
+    local L_EDITOR="$EDITOR -c \":set linebreak\""
+  else
+    local L_EDITOR="$EDITOR"
+  fi
+
   if [ $# -eq 0 ]
   then
-    $EDITOR $NOTE_FILE
+    eval $L_EDITOR $NOTE_FILE
   elif [[ $1 == "--help" ]]
   then
     echo "note [OPTION] [FILE]"
@@ -113,7 +118,7 @@ function note() {
     echo "Unknown option: $1"
     return 1
   else
-    $EDITOR $NOTE_FILE-$1
+    eval $L_EDITOR $NOTE_FILE-$1
   fi
 }
 

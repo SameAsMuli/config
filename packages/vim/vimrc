@@ -512,6 +512,8 @@ vmap <C-_> gc
 
 """"""""""""""""""""""""""""""
 
-" Enable the spell-checking and auto-correct with alt-enter
-set spell
+" Set spelling off by default but provide
+" some nice mappings if it's turned on
+set nospell
 imap <a-cr> <C-o>v[selx<C-x>s<C-o>p
+imap <C-c> <C-o>v[selx<C-x>s<C-o>p
