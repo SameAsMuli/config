@@ -356,9 +356,13 @@ set nostartofline
 
 """"""""""""""""""""""""""""""
 
+" Re-open current file to display any new changes
+map <F5> :e%<CR> \| :echom "Reloaded file!"<CR>
+imap <F5> <C-O>:e% \| :echom "Reloaded file!"<CR>
+
 " Re-source .vimrc
 map <F7> :source $CUSTOM_CONFIG_PACKAGES_DIR/vim/vimrc<CR> \| :echom "Reloaded vimrc!"<CR>
-imap <F7> <C-O>:source $CUSTOM_CONFIG_PACKAGES_DIR/vim/vimrc<CR> \| :echom "Reloaded vimrc!"<CR>
+imap <F7> <C-O>:source $CUSTOM_CONFIG_PACKAGES_DIR/vim/vimrc<CR>
 
 " Source for all sessions when changing vimrc (NEEDS MORE WORK!)
 " function! UpdateVimRC()
