@@ -43,7 +43,7 @@ function note() {
   # Set the linebreak option if we're using a vi variant
   if grep -E 'vi |vim |nvim ' <<< "$EDITOR" > /dev/null
   then
-    local L_EDITOR="$EDITOR -c \":set linebreak\""
+    local L_EDITOR="$EDITOR -c \":set linebreak\" -c \":set spell\""
   else
     local L_EDITOR="$EDITOR"
   fi
