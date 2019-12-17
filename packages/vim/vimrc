@@ -521,3 +521,14 @@ vmap <C-_> gc
 set nospell
 imap <a-cr> <C-o>v[selx<C-x>s<C-o>p
 imap <C-c> <C-o>v[selx<C-x>s<C-o>p
+
+""""""""""""""""""""""""""""""
+
+" Revert back to default C-I usage (seems to
+" have been overriden by one of the plugins)
+unmap <C-I>
+
+""""""""""""""""""""""""""""""
+
+" Auto-format when adding a closing brace
+imap } }<C-O>=[{<C-o>]}
