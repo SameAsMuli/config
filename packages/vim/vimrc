@@ -531,4 +531,4 @@ unmap <C-I>
 """"""""""""""""""""""""""""""
 
 " Auto-format when adding a closing brace
-imap } }<C-O>=[{<C-o>]}
+imap } }<C-O>=%<C-O>%<C-O>A
