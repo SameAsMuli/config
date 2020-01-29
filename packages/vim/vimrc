@@ -509,7 +509,13 @@ imap  A
 
 """"""""""""""""""""""""""""""
 
-" Intellij-style comment toggling
+" Add commentary support for sdf.txt and .plugin
+autocmd FileType plugin setlocal commentstring=!\ %s
+autocmd BufRead sdf.txt setlocal commentstring=!\ %s
+
+""""""""""""""""""""""""""""""
+
+" Intellij-style comment toggling (from commentary)
 nmap <C-_> gcc
 imap <C-_> <C-o>gcc
 vmap <C-_> gc
