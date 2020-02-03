@@ -538,3 +538,8 @@ unmap <C-I>
 
 " Auto-format when adding a closing brace
 imap } }<C-O>=%<C-O>%<C-O>A
+
+""""""""""""""""""""""""""""""
+
+" Quickly turn off -MR option
+nmap <C-W>e :set modifiable write noro uc=200<CR> \| :echom "Editting now enabled!"<CR>
