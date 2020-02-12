@@ -542,4 +542,10 @@ imap } }<C-O>=%<C-O>%<C-O>A
 """"""""""""""""""""""""""""""
 
 " Quickly turn off -MR option
-nmap <C-W>e :set modifiable write noro uc=200<CR> \| :echom "Editting now enabled!"<CR>
+nmap <C-W>e :set modifiable! write! noro!<CR> \| :echom "Editting now enabled!"<CR>
+
+""""""""""""""""""""""""""""""
+
+" Open man pages in vim splits
+runtime ftplugin/man.vim
+nmap <S-K> :Man <C-R><C-W><CR>
