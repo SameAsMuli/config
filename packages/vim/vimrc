@@ -478,6 +478,16 @@ command! -nargs=? Note call NoteFunc(<f-args>)
 
 """"""""""""""""""""""""""""""
 
+" Add todo functionality
+function! TodoFunc(...)
+  execute '!todo' a:1
+endfunction
+
+command! -nargs=? Todo call TodoFunc(<f-args>)
+command! -nargs=? TODO call TodoFunc(<f-args>)
+
+""""""""""""""""""""""""""""""
+
 " Allow mouse usage
 set mouse=a
 
