@@ -563,5 +563,5 @@ nmap <S-K> :Man <C-R><C-W><CR>
 """"""""""""""""""""""""""""""
 
 " Quick file formatting commands
-command! JSON %!python -m json.tool
+command! JSON %!jq .
 command! XML %!xmllint --format -
