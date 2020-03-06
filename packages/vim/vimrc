@@ -559,3 +559,9 @@ nmap <C-W>e :set modifiable! write! noro!<CR> \| :echom "Editting now enabled!"<
 " Open man pages in vim splits
 runtime ftplugin/man.vim
 nmap <S-K> :Man <C-R><C-W><CR>
+
+""""""""""""""""""""""""""""""
+
+" Quick file formatting commands
+command! JSON %!python -m json.tool
+command! XML %!xmllint --format -
