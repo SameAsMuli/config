@@ -6,7 +6,12 @@
 alias config='cd $CUSTOM_CONFIG_DIR'
 alias grep='grep --color=auto -n'
 alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -al'
 alias please='sudo $(history -p !!)'
+alias reload='. ~/.bashrc'
+
+# VIM
 alias vi='$EDITOR'
 alias view='$EDITOR -MR'
 alias vim='$EDITOR'
