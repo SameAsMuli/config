@@ -238,6 +238,10 @@ imap jK <Esc>
 imap Jk <Esc>
 imap JK <Esc>
 
+" Or we're trying to go up and down in insert mode
+imap jj <Esc>jj
+imap kk <Esc>kk
+
 """"""""""""""""""""""""""""""
 
 " Gives a minimum of 5 lines above/below cursor
@@ -339,11 +343,6 @@ set completeopt=menu
 
 " Autocomplete filepaths on TAB in insert mode
 imap <Tab> <C-X><C-F>
-
-""""""""""""""""""""""""""""""
-
-" Enter single command mode by using kj
-imap kk <C-O>
 
 """"""""""""""""""""""""""""""
 
@@ -480,7 +479,7 @@ command! -nargs=? Note call NoteFunc(<f-args>)
 
 " Add todo functionality
 function! TodoFunc(...)
-  execute '!todo' a:1
+  execute '!$TODO_SCRIPT' a:1
 endfunction
 
 command! -nargs=? Todo call TodoFunc(<f-args>)
@@ -547,7 +546,7 @@ unmap <C-I>
 """"""""""""""""""""""""""""""
 
 " Auto-format when adding a closing brace
-imap } }<C-O>=%<C-O>%<C-O>A
+imap }} }<C-O>=%<C-O>%<C-O>A
 
 """"""""""""""""""""""""""""""
 
