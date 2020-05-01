@@ -11,7 +11,11 @@ _todo()
   elif [ $COMP_CWORD -eq 2 ]
   then
 
-    if [ "${COMP_WORDS[1]}" == "edit" ]
+    if [ "${COMP_WORDS[1]}" == "done" ]
+    then
+      COMPREPLY=($(compgen -W "`grep -o \" ${COMP_WORDS[2]}\w*\" \"$TODO_FILE\" | sort | uniq`" -- "${COMP_WORDS[2]}"))
+
+    elif [ "${COMP_WORDS[1]}" == "edit" ]
     then
       COMPREPLY=($(compgen -W "`grep -rl \"$TODO_STRING\"`" -- "${COMP_WORDS[2]}"))
 
