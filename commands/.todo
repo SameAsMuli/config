@@ -35,7 +35,7 @@ function done_tasks {
 }
 
 function rejected_tasks {
-  grep "^/" $TODO_FILE | fold -w $((`tput cols`-1)) -s | sed "s/^\([^/]\)/   \1/;s/\(^\/.*\)/ \x1b[31m\1\x1b[0m/"
+  grep "^/" $TODO_FILE | fold -w $((`tput cols`-1)) -s | sed "s/^\([^\/].*\)/   \x1b[31m\1\x1b[0m/;s/\(^\/.*\)/ \x1b[31m\1\x1b[0m/"
 }
 
 function err {
@@ -352,7 +352,12 @@ then
 
   ENTRY=$(echo $2 | awk '{$1=$1};1') # trim whitespace
 
-  echo "~ $ENTRY" >> "$TODO_FILE"
+  if grep -q '\'"~ $ENTRY" "$TODO_FILE"
+  then
+    err "Task is already in TODO list"
+  else
+    echo "~ $ENTRY" >> "$TODO_FILE"
+  fi
 elif [ "$1" == "reject" ]
 then
   if [ $# -eq 1 ]
@@ -451,7 +456,12 @@ then
 
   ENTRY=$(echo $2 | awk '{$1=$1};1') # trim whitespace
 
-  echo "! $ENTRY" >> "$TODO_FILE"
+  if grep -q '\'"! $ENTRY" "$TODO_FILE"
+  then
+    err "Task is already in TODO list"
+  else
+    echo "! $ENTRY" >> "$TODO_FILE"
+  fi
 elif [ "$1" == "view" ]
 then
   if [ -z "$2" ]
