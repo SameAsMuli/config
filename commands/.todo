@@ -22,6 +22,10 @@ function urgent_tasks {
   grep "^!" $TODO_FILE | fold -w $((`tput cols`-1)) -s | sed "s/^\([^!].*\)/   \x1b[1;31m\1\x1b[0m/;s/\(^!.*\)/ \x1b[1;31m\1\x1b[0m/"
 }
 
+function high_priority_tasks {
+  grep "^#" $TODO_FILE | fold -w $((`tput cols`-1)) -s | sed "s/^\([^#]\)/   \1/;s/\(^#\)/ \x1b[1;31m!\x1b[0m/"
+}
+
 function normal_tasks {
   grep "^-" $TODO_FILE | fold -w $((`tput cols`-1)) -s | sed "s/^\([^-]\)/   \1/;s/\(^-\)/ \x1b[1;31m\1\x1b[0m/"
 }
@@ -74,6 +78,7 @@ then
   if [ -f "$TODO_FILE" ] && [ -s "$TODO_FILE" ]
   then
     urgent_tasks
+    high_priority_tasks
     normal_tasks
     low_priority_tasks
     done_tasks
@@ -330,6 +335,7 @@ then
   echo "  edit"
   echo "  full"
   echo "  help"
+  echo "  high"
   echo "  low"
   echo "  reject"
   echo "  remove"
@@ -338,10 +344,29 @@ then
   echo "  view"
   echo "    archive"
   echo "    done"
+  echo "    high"
   echo "    low"
   echo "    normal"
   echo "    urgent"
   exit 0
+
+elif [ "$1" == "high" ]
+then
+  if [ $# -eq 1 ]
+  then
+    high_priority_tasks
+    exit 0
+  fi
+
+  ENTRY=$(echo $2 | awk '{$1=$1};1') # trim whitespace
+
+  if grep -q '\'"# $ENTRY" "$TODO_FILE"
+  then
+    err "Task is already in TODO list"
+  else
+    echo "# $ENTRY" >> "$TODO_FILE"
+  fi
+
 elif [ "$1" == "low" ] || [ "$1" == "low-priority" ]
 then
   if [ $# -eq 1 ]
@@ -480,6 +505,9 @@ then
   elif [ "$2" == "done" ]
   then
     done_tasks
+  elif [ "$2" == "high" ]
+  then
+    high_priority_tasks
   elif [ "$2" == "low" ] || [ "$2" == "low-priority" ]
   then
     low_priority_tasks
@@ -498,6 +526,7 @@ fi
 
 unset -f draw_screen
 unset -f urgent_tasks
+unset -f high_priority_tasks
 unset -f normal_tasks
 unset -f low_priority_tasks
 unset -f done_tasks

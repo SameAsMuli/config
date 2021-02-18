@@ -147,5 +147,5 @@ _note()
   return
 }
 
-alias notes='note'
+alias notes='note --list'
 complete -F _note note
