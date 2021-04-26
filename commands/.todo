@@ -309,7 +309,7 @@ then
     fi
   fi
 
-  FILE_TODOS=$(grep -IrH "$TODO_STRING" $GREP_BASE_DIR 2> /dev/null | sed "s/^\(.*\):.*$TODO_STRING \(.*\)/[\1]\n - \2/g" | fold -w $((`tput cols`)) -s | sed "s/^\([^ \[]\)/   \1/" | sed "s/^ -/`printf "$BOLD$RED -$RESET"`/" | sed 's/\*\/.*//g' )
+  FILE_TODOS=$(grep -IrH "$TODO_STRING" $GREP_BASE_DIR 2> /dev/null | sed "s/^\(.*\):.*$TODO_STRING \(.*\)/[\1]\n - \2/g" | sed 's/[ ]\+\*\/.*//g' | fold -w $((`tput cols`)) -s | sed "s/^\([^ \[]\)/   \1/" | sed "s/^ -/`printf "$BOLD$RED -$RESET"`/" )
 
   if [ ! -z "$FILE_TODOS" ]
   then
