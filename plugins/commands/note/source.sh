@@ -148,4 +148,4 @@ _note()
 }
 
 alias notes='note --list'
-complete -F _note note
+# complete -F _note note

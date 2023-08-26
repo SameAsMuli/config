@@ -1,8 +1,8 @@
+# Do not track the configuration file
+/config.md
+
 # Allow user to add their own config without influencing git
-local/*
+/local
 
-# Ignore anything in the Reference Directory
-.refs/*
-
-# Ignore any Package config that isn't explicitly committed
-packages/*
+# Ignore private todos
+.todo
