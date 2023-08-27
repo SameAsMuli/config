@@ -22,4 +22,4 @@ if [ -d "$install_dir" ]; then
 	mv "$install_dir" "$old_dir"
 fi
 
-git clone https://github.com/SameAsMuli/nvim/ "$install_dir"
+git clone https://github.com/SameAsMuli/config-nvim/ "$install_dir"
