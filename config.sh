@@ -6,10 +6,23 @@ if [ -z "$CONFIG_DIR" ]; then
 fi
 
 if [ "$CONFIG_DEBUG" = "FULL" ]; then
-	set -x
+	case $- in
+	*x*) ;;
+	*)
+		set -x
+		config_xtrace_reset=True
+		;;
+	esac
 fi
 
 . "$CONFIG_DIR/utils/config.sh"
 . "$CONFIG_DIR/utils/log.sh"
 
-read_config_file || return 1
+read_config_file
+return_value=$?
+
+if [ "$config_xtrace_reset" = True ]; then
+	set +x
+fi
+
+return $return_value

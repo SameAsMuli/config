@@ -1,5 +1,9 @@
 # Custom Configuration
 
+## Load Terminal Configuration
+
+- plugins/terminal
+
 ## Load Custom Commands
 
 - plugins/commands/add_vm
@@ -12,6 +16,11 @@
 
 <!-- Remove or comment-out lines to prevent that configuration from being loaded: -->
 <!-- - plugins/commands/bashmarks -->
+
+## Load Package Configuration
+
+- plugins/packages/nvim
+- plugins/packages/tmux
 
 ## Load Local Configuration Last
 
